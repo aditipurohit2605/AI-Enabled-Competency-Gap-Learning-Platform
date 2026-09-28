@@ -114,3 +114,14 @@ def test_me_endpoint_without_token(client):
     """GET /api/auth/me without token should return 401 Unauthorized."""
     response = client.get("/api/auth/me")
     assert response.status_code == 401
+
+
+def test_direct_api_me_endpoint(client, learner_token, learner_user):
+    """GET /api/me with valid Bearer token should return id, name, and role."""
+    headers = {"Authorization": f"Bearer {learner_token}"}
+    response = client.get("/api/me", headers=headers)
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data["id"] == learner_user["id"]
+    assert data["name"] == learner_user["name"]
+    assert data["role"] == "learner"

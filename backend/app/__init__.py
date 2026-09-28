@@ -31,6 +31,27 @@ def create_app(config_object=None, config_name=None):
     # Initialize extensions
     db.init_app(app)
 
+    # Configure CORS
+    from flask_cors import CORS
+    cors_origins = [o.strip() for o in app.config.get("CORS_ORIGINS", "*").split(",") if o.strip()]
+    CORS(app, origins=cors_origins, supports_credentials=True)
+
+    # Direct /api/me route
+    from flask import jsonify, g
+    from backend.app.utils.auth import role_required
+
+    @app.route("/api/me", methods=["GET"])
+    @role_required()
+    def get_me():
+        user = g.current_user
+        return jsonify({
+            "id": user.id,
+            "name": user.name,
+            "email": user.email,
+            "role": user.role,
+            "user": user.to_dict()
+        }), 200
+
     # Register blueprints
     app.register_blueprint(health_bp)
     app.register_blueprint(auth_bp)
