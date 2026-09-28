@@ -1,0 +1,326 @@
+[
+  {
+    "title": "Introduction to Probability and Descriptive Statistics",
+    "description": "Fundamental concepts of probability, frequency distributions, central tendencies, and variance in official statistics.",
+    "competency": "Statistics Fundamentals",
+    "level": 1,
+    "duration_hours": 6.0,
+    "url": "https://igotkarmayogi.gov.in/course/stats-101",
+    "provider": "iGOT Karmayogi / NSSTI"
+  },
+  {
+    "title": "Applied Statistical Inference and Hypothesis Testing",
+    "description": "Techniques of parametric and non-parametric hypothesis testing, p-values, z-tests, and t-tests for government surveys.",
+    "competency": "Statistics Fundamentals",
+    "level": 3,
+    "duration_hours": 10.0,
+    "url": "https://igotkarmayogi.gov.in/course/stats-201",
+    "provider": "iGOT Karmayogi / MoSPI Academy"
+  },
+  {
+    "title": "Advanced Mathematical Statistics and Multivariate Theory",
+    "description": "Multivariate distributions, maximum likelihood estimation, Bayesian inference, and advanced estimation theory.",
+    "competency": "Statistics Fundamentals",
+    "level": 5,
+    "duration_hours": 14.0,
+    "url": "https://igotkarmayogi.gov.in/course/stats-301",
+    "provider": "iGOT Karmayogi / ISI Kolkata"
+  },
+  {
+    "title": "Fundamentals of Socio-Economic Survey Questionnaire Design",
+    "description": "Crafting structured questionnaire schedules, field trial methodology, avoiding leading inquiries, and enumerator manuals.",
+    "competency": "Survey Design",
+    "level": 2,
+    "duration_hours": 8.0,
+    "url": "https://igotkarmayogi.gov.in/course/survey-101",
+    "provider": "iGOT Karmayogi / NSSO"
+  },
+  {
+    "title": "Digital Field Data Collection and CAPI Systems",
+    "description": "Computer Assisted Personal Interviewing (CAPI) workflow, validation rule programming, and real-time field data monitoring.",
+    "competency": "Survey Design",
+    "level": 3,
+    "duration_hours": 10.0,
+    "url": "https://igotkarmayogi.gov.in/course/survey-201",
+    "provider": "iGOT Karmayogi / MoSPI"
+  },
+  {
+    "title": "National Survey Strategy and Methodological Frameworks",
+    "description": "Strategic planning of pan-India socio-economic surveys, non-sampling error modeling, and longitudinal survey structuring.",
+    "competency": "Survey Design",
+    "level": 5,
+    "duration_hours": 16.0,
+    "url": "https://igotkarmayogi.gov.in/course/survey-301",
+    "provider": "iGOT Karmayogi / MoSPI Academy"
+  },
+  {
+    "title": "Basic Sampling Techniques and Frame Selection",
+    "description": "Simple random sampling with and without replacement, systematic sampling, and sample frame construction from census data.",
+    "competency": "Sampling Methods",
+    "level": 2,
+    "duration_hours": 8.0,
+    "url": "https://igotkarmayogi.gov.in/course/sampling-101",
+    "provider": "iGOT Karmayogi / NSSTI"
+  },
+  {
+    "title": "Stratified and Multi-Stage Cluster Sampling in Practice",
+    "description": "Allocation formulas for stratified sampling, primary sampling unit (PSU) selection, design effects, and sampling weights.",
+    "competency": "Sampling Methods",
+    "level": 4,
+    "duration_hours": 12.0,
+    "url": "https://igotkarmayogi.gov.in/course/sampling-201",
+    "provider": "iGOT Karmayogi / NSSO"
+  },
+  {
+    "title": "Small Area Estimation and Complex Survey Error Estimation",
+    "description": "Fay-Herriot models, synthetic estimation, linearization, and jackknife replication for complex multi-stage surveys.",
+    "competency": "Sampling Methods",
+    "level": 5,
+    "duration_hours": 15.0,
+    "url": "https://igotkarmayogi.gov.in/course/sampling-301",
+    "provider": "iGOT Karmayogi / ISI Delhi"
+  },
+  {
+    "title": "Data Validation and Tabulation Basics",
+    "description": "Manual checking, sanity ranges, syntax errors, and primary validation rules for raw field data files.",
+    "competency": "Data Cleaning",
+    "level": 1,
+    "duration_hours": 6.0,
+    "url": "https://igotkarmayogi.gov.in/course/cleaning-101",
+    "provider": "iGOT Karmayogi / NIC"
+  },
+  {
+    "title": "Automated Survey Data Auditing and Anomaly Detection",
+    "description": "Detecting systematic anomalies, duplicate respondents, logic discrepancies, and automated schema conformance testing.",
+    "competency": "Data Cleaning",
+    "level": 3,
+    "duration_hours": 9.0,
+    "url": "https://igotkarmayogi.gov.in/course/cleaning-201",
+    "provider": "iGOT Karmayogi / MoSPI"
+  },
+  {
+    "title": "Advanced Imputation and Missing Data Methodologies",
+    "description": "Multiple imputation by chained equations (MICE), hot-deck imputation, cold-deck imputation, and missingness pattern modeling.",
+    "competency": "Data Cleaning",
+    "level": 5,
+    "duration_hours": 12.0,
+    "url": "https://igotkarmayogi.gov.in/course/cleaning-301",
+    "provider": "iGOT Karmayogi / IIT Delhi"
+  },
+  {
+    "title": "SQL for Public Sector Data Management",
+    "description": "Relational database concepts, writing SELECT queries, filtering, sorting, and fundamental table joins.",
+    "competency": "SQL",
+    "level": 2,
+    "duration_hours": 8.0,
+    "url": "https://igotkarmayogi.gov.in/course/sql-101",
+    "provider": "iGOT Karmayogi / NIC"
+  },
+  {
+    "title": "Intermediate SQL: Aggregations, Grouping and Subqueries",
+    "description": "Multi-table relational joins, GROUP BY aggregations, HAVING clauses, nested subqueries, and indexing strategies.",
+    "competency": "SQL",
+    "level": 3,
+    "duration_hours": 10.0,
+    "url": "https://igotkarmayogi.gov.in/course/sql-201",
+    "provider": "iGOT Karmayogi / MoSPI"
+  },
+  {
+    "title": "Advanced Analytical SQL and Window Functions",
+    "description": "Window functions (ROW_NUMBER, RANK, LAG, LEAD), Common Table Expressions (CTEs), recursive queries, and query performance tuning.",
+    "competency": "SQL",
+    "level": 4,
+    "duration_hours": 12.0,
+    "url": "https://igotkarmayogi.gov.in/course/sql-301",
+    "provider": "iGOT Karmayogi / NIC"
+  },
+  {
+    "title": "Python Scripting Fundamentals for Data Processing",
+    "description": "Python syntax, lists, dictionaries, functions, file I/O operations, and basic CSV handling for statistical officers.",
+    "competency": "Python for Data Analysis",
+    "level": 1,
+    "duration_hours": 8.0,
+    "url": "https://igotkarmayogi.gov.in/course/python-101",
+    "provider": "iGOT Karmayogi / Digital India"
+  },
+  {
+    "title": "Data Manipulation and Analysis with Pandas and NumPy",
+    "description": "Vectorized computations, DataFrame operations, grouping, merging, pivot tables, and handling dates and times with Pandas.",
+    "competency": "Python for Data Analysis",
+    "level": 3,
+    "duration_hours": 12.0,
+    "url": "https://igotkarmayogi.gov.in/course/python-201",
+    "provider": "iGOT Karmayogi / MoSPI"
+  },
+  {
+    "title": "Building Production Data Pipelines in Python",
+    "description": "Object-oriented scripting, automated ETL pipelines, error handling, batch processing, and modular Python packaging.",
+    "competency": "Python for Data Analysis",
+    "level": 4,
+    "duration_hours": 14.0,
+    "url": "https://igotkarmayogi.gov.in/course/python-301",
+    "provider": "iGOT Karmayogi / IIIT Bangalore"
+  },
+  {
+    "title": "Effective Data Presentation and Chart Selection",
+    "description": "Choosing appropriate charts, color theory, visual hierarchy, and creating clear graphics for government reports.",
+    "competency": "Data Visualization",
+    "level": 2,
+    "duration_hours": 6.0,
+    "url": "https://igotkarmayogi.gov.in/course/dataviz-101",
+    "provider": "iGOT Karmayogi / ISTM"
+  },
+  {
+    "title": "Statistical Graphics with Matplotlib and Seaborn",
+    "description": "Distribution plots, heatmaps, boxplots, multi-faceted plots, and publication-ready statistical figure export in Python.",
+    "competency": "Data Visualization",
+    "level": 3,
+    "duration_hours": 10.0,
+    "url": "https://igotkarmayogi.gov.in/course/dataviz-201",
+    "provider": "iGOT Karmayogi / MoSPI"
+  },
+  {
+    "title": "Building Executive Dashboards with Power BI and Tableau",
+    "description": "Interactive KPIs, drill-through reports, geospatial mapping, and automated dashboard refreshes for decision-makers.",
+    "competency": "Data Visualization",
+    "level": 4,
+    "duration_hours": 14.0,
+    "url": "https://igotkarmayogi.gov.in/course/dataviz-301",
+    "provider": "iGOT Karmayogi / NIC"
+  },
+  {
+    "title": "Linear and Logistic Regression Modeling",
+    "description": "Ordinary Least Squares (OLS) regression, coefficient interpretation, assumptions checking, and binary logistic regression.",
+    "competency": "Regression and Forecasting",
+    "level": 3,
+    "duration_hours": 10.0,
+    "url": "https://igotkarmayogi.gov.in/course/forecast-101",
+    "provider": "iGOT Karmayogi / NSSTI"
+  },
+  {
+    "title": "Time Series Analysis and ARIMA Forecasting",
+    "description": "Stationarity testing, autocorrelation and partial autocorrelation, seasonal ARIMA models, and economic forecasting.",
+    "competency": "Regression and Forecasting",
+    "level": 4,
+    "duration_hours": 14.0,
+    "url": "https://igotkarmayogi.gov.in/course/forecast-201",
+    "provider": "iGOT Karmayogi / MoSPI"
+  },
+  {
+    "title": "Macroeconomic Econometric Modeling and VAR Systems",
+    "description": "Vector Autoregression (VAR), cointegration, error-correction models, and structural macroeconomic simulation.",
+    "competency": "Regression and Forecasting",
+    "level": 5,
+    "duration_hours": 18.0,
+    "url": "https://igotkarmayogi.gov.in/course/forecast-301",
+    "provider": "iGOT Karmayogi / NIPFP"
+  },
+  {
+    "title": "Overview of National Accounts and Macroeconomic Aggregates",
+    "description": "Introduction to the System of National Accounts (SNA), concept of Gross Value Added (GVA), and Gross Domestic Product (GDP).",
+    "competency": "National Accounts Basics",
+    "level": 2,
+    "duration_hours": 8.0,
+    "url": "https://igotkarmayogi.gov.in/course/natacc-101",
+    "provider": "iGOT Karmayogi / MoSPI NAD"
+  },
+  {
+    "title": "Sectoral Value Added and Supply-Use Tables (SUT)",
+    "description": "Industry classification methodologies, intermediate consumption estimation, deflation, and compiling Supply and Use Tables.",
+    "competency": "National Accounts Basics",
+    "level": 4,
+    "duration_hours": 14.0,
+    "url": "https://igotkarmayogi.gov.in/course/natacc-201",
+    "provider": "iGOT Karmayogi / MoSPI NAD"
+  },
+  {
+    "title": "Institutional Sector Accounts and Capital Finance Compilation",
+    "description": "Financial accounts, sequence of accounts for financial and non-financial corporations, government finance statistics, and rest of world.",
+    "competency": "National Accounts Basics",
+    "level": 5,
+    "duration_hours": 16.0,
+    "url": "https://igotkarmayogi.gov.in/course/natacc-301",
+    "provider": "iGOT Karmayogi / RBI & MoSPI"
+  },
+  {
+    "title": "Structured Writing for Statistical Bulletins",
+    "description": "Key principles of clarity, audience adaptation, writing executive summaries, and explaining statistical indicators concisely.",
+    "competency": "Report Writing",
+    "level": 2,
+    "duration_hours": 6.0,
+    "url": "https://igotkarmayogi.gov.in/course/report-101",
+    "provider": "iGOT Karmayogi / ISTM"
+  },
+  {
+    "title": "Policy Brief Formulation and Statistical Storytelling",
+    "description": "Translating data insights into policy recommendations, writing impact notes for ministries, and press release drafting.",
+    "competency": "Report Writing",
+    "level": 4,
+    "duration_hours": 10.0,
+    "url": "https://igotkarmayogi.gov.in/course/report-201",
+    "provider": "iGOT Karmayogi / LBSNAA"
+  },
+  {
+    "title": "Authoring National Statistical Yearbooks and Dissemination Reports",
+    "description": "Managing multi-author reporting projects, technical documentation, metadata standards, and international reporting commitments.",
+    "competency": "Report Writing",
+    "level": 5,
+    "duration_hours": 12.0,
+    "url": "https://igotkarmayogi.gov.in/course/report-301",
+    "provider": "iGOT Karmayogi / MoSPI"
+  },
+  {
+    "title": "Data Protection Principles and Ethical Information Handling",
+    "description": "Introduction to the Digital Personal Data Protection (DPDP) Act, respondent confidentiality, and data handling ethics.",
+    "competency": "Data Governance and Privacy",
+    "level": 2,
+    "duration_hours": 6.0,
+    "url": "https://igotkarmayogi.gov.in/course/gov-101",
+    "provider": "iGOT Karmayogi / MeitY"
+  },
+  {
+    "title": "Statistical Disclosure Control and Anonymization Techniques",
+    "description": "k-anonymity, l-diversity, cell suppression, perturbation, and releasing public microdata without compromising privacy.",
+    "competency": "Data Governance and Privacy",
+    "level": 4,
+    "duration_hours": 12.0,
+    "url": "https://igotkarmayogi.gov.in/course/gov-201",
+    "provider": "iGOT Karmayogi / MoSPI"
+  },
+  {
+    "title": "Enterprise Data Governance Frameworks and Compliance Audit",
+    "description": "Designing agency-wide data access protocols, metadata stewardship, audit logging, and cross-departmental data sharing rules.",
+    "competency": "Data Governance and Privacy",
+    "level": 5,
+    "duration_hours": 14.0,
+    "url": "https://igotkarmayogi.gov.in/course/gov-301",
+    "provider": "iGOT Karmayogi / NeGD"
+  },
+  {
+    "title": "Introduction to Predictive Modeling and Supervised Learning",
+    "description": "Foundations of machine learning, classification vs regression, decision trees, k-nearest neighbors, and train/test splits.",
+    "competency": "Machine Learning Basics",
+    "level": 2,
+    "duration_hours": 10.0,
+    "url": "https://igotkarmayogi.gov.in/course/ml-101",
+    "provider": "iGOT Karmayogi / Digital India"
+  },
+  {
+    "title": "Scikit-Learn Workflows and Model Evaluation in Python",
+    "description": "Cross-validation, hyperparameter tuning, ROC-AUC, confusion matrices, Random Forests, and Gradient Boosting algorithms.",
+    "competency": "Machine Learning Basics",
+    "level": 3,
+    "duration_hours": 14.0,
+    "url": "https://igotkarmayogi.gov.in/course/ml-201",
+    "provider": "iGOT Karmayogi / IIIT Hyderabad"
+  },
+  {
+    "title": "Unsupervised Learning, Clustering and Dimensionality Reduction",
+    "description": "K-Means clustering, hierarchical clustering, Principal Component Analysis (PCA), t-SNE, and feature selection pipelines.",
+    "competency": "Machine Learning Basics",
+    "level": 4,
+    "duration_hours": 14.0,
+    "url": "https://igotkarmayogi.gov.in/course/ml-301",
+    "provider": "iGOT Karmayogi / IIT Madras"
+  }
+]

@@ -9,7 +9,7 @@ from backend.app.models.competency import (
     CycleDetectedError,
     SelfReferenceError
 )
-from backend.app.models.learning import Course
+from backend.app.models.learning import Course, UserCourseProgress
 from backend.app.models.assessment import Document, Question, QuizAttempt
 
 __all__ = [
@@ -23,6 +23,7 @@ __all__ = [
     "CycleDetectedError",
     "SelfReferenceError",
     "Course",
+    "UserCourseProgress",
     "Document",
     "Question",
     "QuizAttempt"

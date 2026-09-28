@@ -7,6 +7,7 @@ from backend.app.blueprints.auth import auth_bp
 from backend.app.blueprints.framework import framework_bp
 from backend.app.blueprints.profile import profile_bp
 from backend.app.blueprints.gap import gap_bp
+from backend.app.blueprints.path import path_bp
 # Import models to ensure they are registered with SQLAlchemy metadata
 import backend.app.models  # noqa: F401
 
@@ -35,6 +36,7 @@ def create_app(config_object=None, config_name=None):
     app.register_blueprint(framework_bp)
     app.register_blueprint(profile_bp)
     app.register_blueprint(gap_bp)
+    app.register_blueprint(path_bp)
 
     # Ensure tables are created if running standalone
     with app.app_context():

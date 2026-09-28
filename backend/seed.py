@@ -10,6 +10,7 @@ from backend.app import create_app
 from backend.app.extensions import db
 from backend.app.models.user import User
 from backend.app.models.competency import Role, Competency, RoleCompetency, Prerequisite
+from backend.app.models.learning import Course
 
 
 COMPETENCIES_DATA = [
@@ -247,9 +248,40 @@ def seed_database(app=None):
                     else:
                         rc.required_level = level
 
-        db.session.commit()
+        # 4. Seed Courses from mock catalogue
+        data_courses_path = Path(__file__).resolve().parent / "data" / "courses.json"
+        courses_seeded = 0
+        if data_courses_path.exists():
+            import json
+            courses_list = json.loads(data_courses_path.read_text(encoding="utf-8"))
+            for c_data in courses_list:
+                comp = comp_map.get(c_data["competency"])
+                if not comp:
+                    continue
+                course = Course.query.filter_by(title=c_data["title"]).first()
+                if not course:
+                    course = Course(
+                        title=c_data["title"],
+                        description=c_data.get("description", ""),
+                        competency_id=comp.id,
+                        level=int(c_data["level"]),
+                        duration_hours=float(c_data.get("duration_hours", 5.0)),
+                        provider=c_data.get("provider", "iGOT Karmayogi"),
+                        url=c_data.get("url")
+                    )
+                    db.session.add(course)
+                else:
+                    course.description = c_data.get("description", "")
+                    course.competency_id = comp.id
+                    course.level = int(c_data["level"])
+                    course.duration_hours = float(c_data.get("duration_hours", 5.0))
+                    course.provider = c_data.get("provider", "iGOT Karmayogi")
+                    course.url = c_data.get("url")
+                courses_seeded += 1
 
-        # 4. Seed Users
+            db.session.commit()
+
+        # 5. Seed Users
         for user_data in USERS_DATA:
             user = User.query.filter_by(email=user_data["email"]).first()
             if not user:
@@ -271,7 +303,8 @@ def seed_database(app=None):
             "competencies_count": len(comp_map),
             "roles_count": len(ROLES_DATA),
             "users_count": len(USERS_DATA),
-            "prerequisites_count": len(PREREQUISITES_DATA)
+            "prerequisites_count": len(PREREQUISITES_DATA),
+            "courses_count": courses_seeded
         }
 
 
