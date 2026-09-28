@@ -386,20 +386,20 @@ onMounted(() => {
 
 .feedback-banner.success {
   background-color: var(--color-success-light);
-  color: #065f46;
-  border: 1px solid #a7f3d0;
+  color: var(--color-success-text);
+  border: 1px solid var(--color-success-border);
 }
 
 .feedback-banner.warning {
   background-color: var(--color-warning-light);
-  color: #92400e;
-  border: 1px solid #fde68a;
+  color: var(--color-warning-text);
+  border: 1px solid var(--color-warning-border);
 }
 
 .feedback-banner.danger {
   background-color: var(--color-danger-light);
-  color: #991b1b;
-  border: 1px solid #fecaca;
+  color: var(--color-danger-text);
+  border: 1px solid var(--color-danger-border);
 }
 
 .tabs-nav {
@@ -564,7 +564,8 @@ onMounted(() => {
   font-weight: 700;
   font-size: var(--font-size-xs);
   cursor: pointer;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
   transition: all var(--transition-fast);
 }
 

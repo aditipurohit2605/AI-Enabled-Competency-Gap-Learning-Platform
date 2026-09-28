@@ -35,7 +35,7 @@
         description="Submit a quiz or diagnostic evaluation to start tracking your readiness over time."
       />
       <div v-else class="chart-wrapper">
-        <Line :data="lineChartData" :options="lineChartOptions" />
+        <Line :key="themeStore.currentTheme" :data="lineChartData" :options="lineChartOptions" />
       </div>
     </div>
 
@@ -110,6 +110,7 @@ import {
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
 import api from '@/api'
+import { useThemeStore } from '@/stores/theme'
 import LoadingState from '@/components/common/LoadingState.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
 import EmptyState from '@/components/common/EmptyState.vue'
@@ -117,6 +118,7 @@ import LevelBadge from '@/components/common/LevelBadge.vue'
 
 ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, CategoryScale, LinearScale, Filler)
 
+const themeStore = useThemeStore()
 const roles = ref([])
 const selectedRoleId = ref(null)
 
@@ -148,6 +150,8 @@ const getScoreBadge = (score) => {
 
 const lineChartData = computed(() => {
   const points = snapshots.value || []
+  const isDark = themeStore.isDark
+
   return {
     labels: points.map((p) => {
       const d = new Date(p.taken_at)
@@ -156,10 +160,12 @@ const lineChartData = computed(() => {
     datasets: [
       {
         label: 'Role Readiness Percentage (%)',
-        backgroundColor: 'rgba(37, 99, 235, 0.1)',
-        borderColor: '#2563eb',
-        pointBackgroundColor: '#2563eb',
-        pointRadius: 4,
+        backgroundColor: isDark ? 'rgba(59, 130, 246, 0.2)' : 'rgba(37, 99, 235, 0.1)',
+        borderColor: isDark ? '#60a5fa' : '#2563eb',
+        pointBackgroundColor: isDark ? '#3b82f6' : '#2563eb',
+        pointBorderColor: isDark ? '#ffffff' : '#1e3a8a',
+        pointRadius: 5,
+        pointHoverRadius: 7,
         tension: 0.3,
         fill: true,
         data: points.map((p) => Math.round(p.readiness_pct))
@@ -168,36 +174,62 @@ const lineChartData = computed(() => {
   }
 })
 
-const lineChartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      position: 'top',
-      labels: { font: { family: 'Inter', size: 12 } }
-    }
-  },
-  scales: {
-    y: {
-      min: 0,
-      max: 100,
-      ticks: {
-        callback: (v) => `${v}%`,
-        stepSize: 20,
-        font: { family: 'Inter' }
+const lineChartOptions = computed(() => {
+  const isDark = themeStore.isDark
+  const textMuted = isDark ? '#94a3b8' : '#64748b'
+  const textMain = isDark ? '#f1f5f9' : '#0f172a'
+  const gridLine = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)'
+
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          color: textMain,
+          font: { family: 'Inter', size: 12 }
+        }
       },
-      title: {
-        display: true,
-        text: 'Readiness %'
+      tooltip: {
+        backgroundColor: isDark ? '#1e293b' : '#0f172a',
+        titleColor: '#ffffff',
+        bodyColor: '#ffffff',
+        borderColor: isDark ? '#334155' : '#e2e8f0',
+        borderWidth: 1
       }
     },
-    x: {
-      ticks: {
-        font: { family: 'Inter', size: 11 }
+    scales: {
+      y: {
+        min: 0,
+        max: 100,
+        ticks: {
+          callback: (v) => `${v}%`,
+          stepSize: 20,
+          color: textMuted,
+          font: { family: 'Inter' }
+        },
+        grid: {
+          color: gridLine
+        },
+        title: {
+          display: true,
+          text: 'Readiness %',
+          color: textMuted
+        }
+      },
+      x: {
+        ticks: {
+          color: textMuted,
+          font: { family: 'Inter', size: 11 }
+        },
+        grid: {
+          color: gridLine
+        }
       }
     }
   }
-}
+})
 
 const loadTrendData = async () => {
   if (!selectedRoleId.value) return

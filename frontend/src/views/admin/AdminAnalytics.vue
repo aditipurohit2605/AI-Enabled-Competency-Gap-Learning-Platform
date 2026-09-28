@@ -73,7 +73,7 @@
 
         <div v-if="analytics.top_gaps && analytics.top_gaps.length > 0" class="gaps-container">
           <div class="chart-wrapper">
-            <Bar :data="topGapsChartData" :options="topGapsChartOptions" />
+            <Bar :key="themeStore.currentTheme" :data="topGapsChartData" :options="topGapsChartOptions" />
           </div>
 
           <div class="gaps-summary-list">
@@ -218,12 +218,14 @@ import {
 } from 'chart.js'
 import { Bar } from 'vue-chartjs'
 import api from '@/api'
+import { useThemeStore } from '@/stores/theme'
 import LoadingState from '@/components/common/LoadingState.vue'
 import ErrorState from '@/components/common/ErrorState.vue'
 import ProgressBar from '@/components/common/ProgressBar.vue'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
+const themeStore = useThemeStore()
 const roles = ref([])
 const selectedRoleId = ref(null)
 const analytics = ref(null)
@@ -272,19 +274,20 @@ const getScoreClass = (score) => {
 const topGapsChartData = computed(() => {
   if (!analytics.value?.top_gaps) return { labels: [], datasets: [] }
   const gaps = analytics.value.top_gaps
+  const isDark = themeStore.isDark
 
   return {
     labels: gaps.map((g) => g.competency_name),
     datasets: [
       {
         label: 'Average Competency Deficit (Levels)',
-        backgroundColor: '#ef4444',
+        backgroundColor: isDark ? '#f87171' : '#ef4444',
         borderRadius: 6,
         data: gaps.map((g) => g.average_gap)
       },
       {
         label: 'Affected Personnel',
-        backgroundColor: '#f59e0b',
+        backgroundColor: isDark ? '#fbbf24' : '#f59e0b',
         borderRadius: 6,
         data: gaps.map((g) => g.learners_affected)
       }
@@ -292,31 +295,46 @@ const topGapsChartData = computed(() => {
   }
 })
 
-const topGapsChartOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      position: 'top',
-      labels: {
-        font: { family: 'inherit', size: 12, weight: '600' }
+const topGapsChartOptions = computed(() => {
+  const isDark = themeStore.isDark
+  const textMuted = isDark ? '#94a3b8' : '#64748b'
+  const textMain = isDark ? '#f1f5f9' : '#0f172a'
+  const gridLine = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)'
+
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          color: textMain,
+          font: { family: 'inherit', size: 12, weight: '600' }
+        }
+      },
+      tooltip: {
+        backgroundColor: isDark ? '#1e293b' : '#0f172a',
+        titleColor: '#ffffff',
+        bodyColor: '#ffffff',
+        borderColor: isDark ? '#334155' : '#e2e8f0',
+        borderWidth: 1,
+        padding: 10,
+        cornerRadius: 6
       }
     },
-    tooltip: {
-      padding: 10,
-      cornerRadius: 6
-    }
-  },
-  scales: {
-    y: {
-      beginAtZero: true,
-      grid: { color: 'rgba(0, 0, 0, 0.05)' }
-    },
-    x: {
-      grid: { display: false }
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: { color: textMuted },
+        grid: { color: gridLine }
+      },
+      x: {
+        ticks: { color: textMuted },
+        grid: { display: false }
+      }
     }
   }
-}
+})
 </script>
 
 <style scoped>
@@ -502,82 +520,19 @@ const topGapsChartOptions = {
   border-radius: 4px;
 }
 
-.level-0 { background: #f1f5f9; color: #64748b; }
-.level-1 { background: #fee2e2; color: #991b1b; }
-.level-2 { background: #ffedd5; color: #9a3412; }
-.level-3 { background: #fef9c3; color: #854d0e; }
-.level-4 { background: #e0f2fe; color: #0369a1; }
-.level-5 { background: #dcfce7; color: #166534; }
+.level-0, .heat-level-0 { background-color: #f1f5f9; color: #475569; }
+.level-1, .heat-level-1 { background-color: #fee2e2; color: #991b1b; }
+.level-2, .heat-level-2 { background-color: #ffedd5; color: #9a3412; }
+.level-3, .heat-level-3 { background-color: #fef9c3; color: #854d0e; }
+.level-4, .heat-level-4 { background-color: #e0f2fe; color: #0369a1; }
+.level-5, .heat-level-5 { background-color: #dcfce7; color: #166534; }
 
-.heatmap-table-wrap {
-  max-height: 480px;
-  overflow: auto;
-}
-
-.heatmap-table {
-  border-collapse: separate;
-  border-spacing: 2px;
-}
-
-.sticky-col {
-  position: sticky;
-  left: 0;
-  background: var(--color-surface);
-  z-index: 2;
-  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.04);
-}
-
-.learner-col {
-  min-width: 220px;
-}
-
-.learner-cell {
-  padding: 0.625rem 0.875rem;
-}
-
-.learner-name {
-  font-weight: 700;
-  font-size: var(--font-size-sm);
-  color: var(--color-text-main);
-}
-
-.learner-email {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-}
-
-.comp-col-header {
-  min-width: 130px;
-  max-width: 160px;
-  font-size: var(--font-size-xs);
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0.625rem 0.5rem;
-}
-
-.heatmap-cell {
-  text-align: center;
-  padding: 0.625rem 0.5rem;
-  border-radius: 4px;
-  font-weight: 700;
-  font-size: var(--font-size-xs);
-  transition: transform var(--transition-fast);
-}
-
-.heatmap-cell:hover {
-  transform: scale(1.08);
-  box-shadow: var(--shadow-sm);
-  z-index: 3;
-}
-
-.heat-level-0 { background-color: #f1f5f9; color: #64748b; }
-.heat-level-1 { background-color: #fee2e2; color: #991b1b; }
-.heat-level-2 { background-color: #ffedd5; color: #9a3412; }
-.heat-level-3 { background-color: #fef9c3; color: #854d0e; }
-.heat-level-4 { background-color: #e0f2fe; color: #0369a1; }
-.heat-level-5 { background-color: #dcfce7; color: #166534; }
+[data-theme="dark"] .level-0, [data-theme="dark"] .heat-level-0 { background-color: #1e293b; color: #94a3b8; border: 1px solid #334155; }
+[data-theme="dark"] .level-1, [data-theme="dark"] .heat-level-1 { background-color: rgba(239, 68, 68, 0.25); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.4); }
+[data-theme="dark"] .level-2, [data-theme="dark"] .heat-level-2 { background-color: rgba(249, 115, 22, 0.25); color: #fdba74; border: 1px solid rgba(249, 115, 22, 0.4); }
+[data-theme="dark"] .level-3, [data-theme="dark"] .heat-level-3 { background-color: rgba(234, 179, 8, 0.25); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.4); }
+[data-theme="dark"] .level-4, [data-theme="dark"] .heat-level-4 { background-color: rgba(14, 165, 233, 0.25); color: #7dd3fc; border: 1px solid rgba(14, 165, 233, 0.4); }
+[data-theme="dark"] .level-5, [data-theme="dark"] .heat-level-5 { background-color: rgba(34, 197, 94, 0.25); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.4); }
 
 .score-badge {
   font-weight: 700;

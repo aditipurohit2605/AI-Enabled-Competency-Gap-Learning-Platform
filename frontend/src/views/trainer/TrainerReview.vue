@@ -445,15 +445,15 @@ const handleApproveAll = async () => {
 }
 
 .alert-success {
-  background-color: #ecfdf5;
-  color: #065f46;
-  border: 1px solid #a7f3d0;
+  background-color: var(--color-success-light);
+  color: var(--color-success-text);
+  border: 1px solid var(--color-success-border);
 }
 
 .alert-danger {
-  background-color: #fef2f2;
-  color: #991b1b;
-  border: 1px solid #fecaca;
+  background-color: var(--color-danger-light);
+  color: var(--color-danger-text);
+  border: 1px solid var(--color-danger-border);
 }
 
 .alert-close {
@@ -524,9 +524,9 @@ const handleApproveAll = async () => {
   box-shadow: var(--shadow-sm);
 }
 
-.status-tab.draft.active { color: #d97706; }
-.status-tab.approved.active { color: #059669; }
-.status-tab.rejected.active { color: #dc2626; }
+.status-tab.draft.active { color: var(--color-warning-text); }
+.status-tab.approved.active { color: var(--color-success-text); }
+.status-tab.rejected.active { color: var(--color-danger-text); }
 
 /* Question Cards */
 .questions-list {
@@ -641,8 +641,8 @@ const handleApproveAll = async () => {
 }
 
 .option-row.is-correct {
-  border-color: #10b981;
-  background-color: #ecfdf5;
+  border-color: var(--color-success-border);
+  background-color: var(--color-success-light);
 }
 
 .radio-label {
@@ -667,8 +667,8 @@ const handleApproveAll = async () => {
 
 /* Source passage */
 .source-passage-box {
-  background-color: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background-color: var(--color-passage-bg);
+  border: 1px solid var(--color-passage-border);
   border-radius: var(--radius-md);
   padding: 0.875rem 1rem;
 }
@@ -687,7 +687,7 @@ const handleApproveAll = async () => {
 .source-label {
   font-size: var(--font-size-xs);
   font-weight: 700;
-  color: #64748b;
+  color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -695,7 +695,7 @@ const handleApproveAll = async () => {
 .source-text {
   margin: 0;
   font-size: var(--font-size-xs);
-  color: #334155;
+  color: var(--color-text-main);
   line-height: 1.5;
   font-style: italic;
 }
@@ -715,28 +715,29 @@ const handleApproveAll = async () => {
 }
 
 .btn-success {
-  background-color: #10b981;
-  color: white;
-  border: 1px solid #059669;
+  background-color: var(--color-success);
+  color: #ffffff;
+  border: 1px solid transparent;
 }
 .btn-success:hover {
-  background-color: #059669;
+  background-color: var(--color-success-text);
 }
 
 .btn-danger {
-  background-color: #ef4444;
-  color: white;
-  border: 1px solid #dc2626;
+  background-color: var(--color-danger);
+  color: #ffffff;
+  border: 1px solid transparent;
 }
 .btn-danger:hover {
-  background-color: #dc2626;
+  background-color: var(--color-danger-text);
 }
 
 /* Modal */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;

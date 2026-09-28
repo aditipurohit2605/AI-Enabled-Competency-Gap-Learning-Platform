@@ -9,7 +9,7 @@ from backend.app.extensions import db
 from backend.app.models.assessment import Document, Question
 from backend.services.chunker import load_document_index, search_document_chunks
 from backend.services.embedder import embed
-from backend.services.llm_client import get_llm_client
+from backend.services.llm_client import get_llm_client, LLMConfigError, LLMError
 
 logger = logging.getLogger(__name__)
 
@@ -280,8 +280,12 @@ Return a JSON object in this exact schema:
 """
         try:
             response = llm_client.generate_json(prompt)
+        except LLMConfigError:
+            raise
         except Exception as e:
             logger.error(f"Error calling LLM for chunk {chunk.get('chunk_id')}: {e}")
+            if generated_total == 0 and len(kept_questions) == 0 and chunk == selected_chunks[-1]:
+                raise
             continue
 
         candidate_list = []

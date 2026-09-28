@@ -37,7 +37,7 @@ defineEmits(['retry'])
   gap: 1rem;
   padding: 1.25rem;
   background-color: var(--color-danger-light);
-  border: 1px solid #fecaca;
+  border: 1px solid var(--color-danger-border);
   border-radius: var(--radius-lg);
   margin: 1rem 0;
 }
@@ -52,13 +52,14 @@ defineEmits(['retry'])
 }
 
 .error-title {
-  color: #991b1b;
+  color: var(--color-danger-text);
   font-size: var(--font-size-base);
   margin-bottom: 0.25rem;
 }
 
 .error-message {
-  color: #b91c1c;
+  color: var(--color-danger-text);
+  opacity: 0.9;
   font-size: var(--font-size-sm);
 }
 </style>

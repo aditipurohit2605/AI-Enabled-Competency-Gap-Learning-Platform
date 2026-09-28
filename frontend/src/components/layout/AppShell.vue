@@ -14,14 +14,17 @@
         </div>
       </div>
 
-      <div class="header-user" v-if="auth.isAuthenticated">
-        <div class="user-meta">
-          <span class="user-name">{{ auth.userName }}</span>
-          <span class="user-role badge" :class="roleBadgeClass">{{ auth.role }}</span>
+      <div class="header-actions">
+        <ThemeToggle />
+        <div class="header-user" v-if="auth.isAuthenticated">
+          <div class="user-meta">
+            <span class="user-name">{{ auth.userName }}</span>
+            <span class="user-role badge" :class="roleBadgeClass">{{ auth.role }}</span>
+          </div>
+          <button class="btn btn-secondary btn-sm" @click="handleLogout">
+            Sign Out
+          </button>
         </div>
-        <button class="btn btn-secondary btn-sm" @click="handleLogout">
-          Sign Out
-        </button>
       </div>
     </header>
 
@@ -99,6 +102,7 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import ThemeToggle from '@/components/common/ThemeToggle.vue'
 
 const auth = useAuthStore()
 const router = useRouter()
@@ -159,6 +163,12 @@ const handleLogout = () => {
   font-size: 0.6875rem;
   color: var(--color-text-muted);
   display: block;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .header-user {

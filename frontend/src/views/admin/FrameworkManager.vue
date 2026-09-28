@@ -691,21 +691,21 @@ const executeDelete = async () => {
 }
 
 .alert-success {
-  background-color: #ecfdf5;
-  color: #065f46;
-  border: 1px solid #a7f3d0;
+  background-color: var(--color-success-light);
+  color: var(--color-success-text);
+  border: 1px solid var(--color-success-border);
 }
 
 .alert-danger {
-  background-color: #fef2f2;
-  color: #991b1b;
-  border: 1px solid #fecaca;
+  background-color: var(--color-danger-light);
+  color: var(--color-danger-text);
+  border: 1px solid var(--color-danger-border);
 }
 
 .alert-cycle {
-  background-color: #fff7ed;
-  border: 2px solid #f97316;
-  color: #9a3412;
+  background-color: var(--color-warning-light);
+  border: 2px solid var(--color-warning-border);
+  color: var(--color-warning-text);
   padding: 1rem 1.25rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
@@ -733,14 +733,16 @@ const executeDelete = async () => {
   margin: 0.25rem 0;
   font-family: monospace;
   font-size: var(--font-size-xs);
-  background: rgba(249, 115, 22, 0.1);
+  background: var(--color-surface);
+  color: var(--color-warning-text);
+  border: 1px solid var(--color-warning-border);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
 }
 
 .cycle-hint {
   font-size: var(--font-size-xs);
-  color: #c2410c;
+  color: var(--color-warning-text);
   display: block;
 }
 
@@ -837,7 +839,8 @@ const executeDelete = async () => {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;

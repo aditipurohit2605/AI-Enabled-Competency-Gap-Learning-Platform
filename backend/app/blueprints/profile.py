@@ -76,12 +76,13 @@ def analyze_profile():
     }), 200
 
 
-@profile_bp.route("/self-assessment", methods=["PUT"])
+@profile_bp.route("/self-assessment", methods=["PUT", "POST"])
+@profile_bp.route("/self-assess", methods=["POST", "PUT"])
 @role_required()
 def self_assessment():
     """
     Submit or update self-assessed competency levels (1-5):
-    Accepts object: {"competency_id": level, ...} or list of {"competency_id": x, "level": y}
+    Accepts object: {"competency_id": level, ...}, {"ratings": {...}}, or list of {"competency_id": x, "level": y}
     Saves to UserSkill with source='self'.
     """
     data = request.get_json(silent=True)
@@ -91,8 +92,10 @@ def self_assessment():
     user_id = g.current_user.id
     saved = []
 
-    # Format 1: dictionary {"1": 4, "2": 3}
-    if isinstance(data, dict):
+    # Handle {"ratings": {...}} format from frontend
+    if isinstance(data, dict) and "ratings" in data and isinstance(data["ratings"], dict):
+        entries = list(data["ratings"].items())
+    elif isinstance(data, dict):
         entries = list(data.items())
     elif isinstance(data, list):
         entries = []
@@ -184,4 +187,61 @@ def get_user_skills():
         "user_id": user_id,
         "total_skills": len(skill_list),
         "skills": skill_list
+    }), 200
+
+
+@profile_bp.route("/skills", methods=["POST", "PUT"])
+@role_required()
+def save_user_skills():
+    """
+    Explicitly save or update extracted profile skills.
+    Accepts: {"skills": [{"competency_id": ..., "level": ..., "evidence": ...}, ...]}
+    """
+    data = request.get_json(silent=True) or {}
+    skills_data = data.get("skills", [])
+    if not isinstance(skills_data, list):
+        return jsonify({"error": "Bad Request", "message": "Expected list of skills"}), 400
+
+    user_id = g.current_user.id
+    saved = []
+
+    for item in skills_data:
+        comp_id = item.get("competency_id")
+        level = item.get("level")
+        if comp_id is None or level is None:
+            continue
+
+        comp = db.session.get(Competency, comp_id)
+        if not comp:
+            continue
+
+        evidence = item.get("evidence")
+        evidence_str = json.dumps(evidence) if isinstance(evidence, (dict, list)) else str(evidence or "")
+
+        us = UserSkill.query.filter_by(
+            user_id=user_id,
+            competency_id=comp_id,
+            source="profile"
+        ).first()
+
+        if us:
+            us.level = float(level)
+            us.evidence = evidence_str
+        else:
+            us = UserSkill(
+                user_id=user_id,
+                competency_id=comp_id,
+                level=float(level),
+                evidence=evidence_str,
+                source="profile"
+            )
+            db.session.add(us)
+
+        saved.append({"competency_id": comp_id, "level": float(level)})
+
+    db.session.commit()
+    return jsonify({
+        "message": f"Successfully saved {len(saved)} skills to profile",
+        "saved_count": len(saved),
+        "skills": saved
     }), 200

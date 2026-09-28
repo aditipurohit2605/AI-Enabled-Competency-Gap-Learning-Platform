@@ -18,6 +18,7 @@ from backend.services.chunker import (
     UPLOADS_DIR
 )
 from backend.services.mcq_generator import generate_mcqs
+from backend.services.llm_client import LLMConfigError
 from backend.services.leveling import (
     save_quiz_result_and_update_level,
     get_user_current_competency_level,
@@ -226,6 +227,8 @@ def generate_questions_for_document(document_id):
             difficulty=difficulty,
             topic_focus=topic_focus
         )
+    except LLMConfigError as e:
+        return jsonify({"error": "Service Unavailable", "message": str(e)}), 503
     except Exception as e:
         return jsonify({"error": "Generation Error", "message": str(e)}), 400
 

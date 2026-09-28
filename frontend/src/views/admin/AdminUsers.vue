@@ -217,9 +217,9 @@ const formatDate = (isoStr) => {
   border: 1px solid var(--color-border);
 }
 
-.pill-learner strong { color: #2563eb; }
-.pill-trainer strong { color: #d97706; }
-.pill-admin strong { color: #dc2626; }
+.pill-learner strong { color: var(--color-accent-text); }
+.pill-trainer strong { color: var(--color-warning-text); }
+.pill-admin strong { color: var(--color-danger-text); }
 
 .filters-bar {
   display: flex;

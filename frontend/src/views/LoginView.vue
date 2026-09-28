@@ -1,6 +1,9 @@
 <template>
   <div class="auth-page">
     <div class="auth-card card">
+      <div class="auth-top-bar">
+        <ThemeToggle />
+      </div>
       <div class="auth-header">
         <div class="auth-logo">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
@@ -87,15 +90,21 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, reactive, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import ThemeToggle from '@/components/common/ThemeToggle.vue'
 
 const auth = useAuthStore()
 const router = useRouter()
+const route = useRoute()
 
-const isRegistering = ref(false)
+const isRegistering = ref(route.path === '/register')
 const errorMessage = ref('')
+
+watch(() => route.path, (newPath) => {
+  isRegistering.value = newPath === '/register'
+})
 
 const form = reactive({
   name: '',
@@ -107,6 +116,11 @@ const form = reactive({
 const toggleMode = () => {
   isRegistering.value = !isRegistering.value
   errorMessage.value = ''
+  if (isRegistering.value) {
+    router.replace('/register')
+  } else {
+    router.replace('/login')
+  }
 }
 
 const handleSubmit = async () => {
@@ -131,13 +145,20 @@ const handleSubmit = async () => {
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-surface-hover) 100%);
 }
 
 .auth-card {
   width: 100%;
   max-width: 440px;
   padding: 2.5rem 2rem;
+  position: relative;
+}
+
+.auth-top-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
 }
 
 .auth-header {
@@ -162,12 +183,12 @@ const handleSubmit = async () => {
 
 .error-banner {
   background-color: var(--color-danger-light);
-  color: #b91c1c;
+  color: var(--color-danger-text);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
   margin-bottom: 1.25rem;
   font-size: var(--font-size-sm);
-  border: 1px solid #fecaca;
+  border: 1px solid var(--color-danger-border);
 }
 
 .submit-btn {

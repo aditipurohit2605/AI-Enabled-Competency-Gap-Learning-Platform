@@ -462,11 +462,11 @@ onMounted(async () => {
 
 .error-banner {
   background-color: var(--color-danger-light);
-  color: #b91c1c;
+  color: var(--color-danger-text);
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
   font-size: var(--font-size-sm);
-  border: 1px solid #fecaca;
+  border: 1px solid var(--color-danger-border);
 }
 
 .setup-card {
@@ -545,7 +545,7 @@ onMounted(async () => {
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.25rem;
-  background-color: #ffffff;
+  background-color: var(--color-surface);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -717,13 +717,13 @@ onMounted(async () => {
 
 .opt-correct {
   background-color: var(--color-success-light);
-  border-color: #a7f3d0;
+  border-color: var(--color-success-border);
   font-weight: 600;
 }
 
 .opt-chosen-wrong {
   background-color: var(--color-danger-light);
-  border-color: #fecaca;
+  border-color: var(--color-danger-border);
   font-weight: 600;
 }
 
@@ -740,8 +740,8 @@ onMounted(async () => {
   border-radius: var(--radius-sm);
 }
 
-.tag-correct { background-color: #d1fae5; color: #065f46; }
-.tag-wrong { background-color: #fee2e2; color: #991b1b; }
+.tag-correct { background-color: var(--color-success-light); color: var(--color-success-text); }
+.tag-wrong { background-color: var(--color-danger-light); color: var(--color-danger-text); }
 
 .explanation-box {
   background-color: var(--color-bg);
@@ -752,8 +752,8 @@ onMounted(async () => {
 }
 
 .citation-box {
-  background-color: #f8fafc;
-  border-left: 3px solid #64748b;
+  background-color: var(--color-passage-bg);
+  border-left: 3px solid var(--color-border-strong);
   padding: 0.625rem 0.875rem;
   font-size: var(--font-size-xs);
 }

@@ -414,7 +414,8 @@ onMounted(() => {
 }
 
 .status-btn {
-  background: #ffffff;
+  background: var(--color-surface);
+  color: var(--color-text-main);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: 0.2rem 0.4rem;

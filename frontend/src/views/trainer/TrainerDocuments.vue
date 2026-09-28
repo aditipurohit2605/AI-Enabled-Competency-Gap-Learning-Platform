@@ -512,15 +512,15 @@ const startGeneration = async () => {
 }
 
 .alert-success {
-  background-color: #ecfdf5;
-  color: #065f46;
-  border: 1px solid #a7f3d0;
+  background-color: var(--color-success-light);
+  color: var(--color-success-text);
+  border: 1px solid var(--color-success-border);
 }
 
 .alert-danger {
-  background-color: #fef2f2;
-  color: #991b1b;
-  border: 1px solid #fecaca;
+  background-color: var(--color-danger-light);
+  color: var(--color-danger-text);
+  border: 1px solid var(--color-danger-border);
 }
 
 .alert-close {
@@ -629,7 +629,8 @@ const startGeneration = async () => {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -825,7 +826,7 @@ const startGeneration = async () => {
   text-align: center;
   font-weight: 700;
   font-size: var(--font-size-base);
-  color: #065f46;
+  color: var(--color-success-text);
 }
 
 .result-stats {
@@ -845,13 +846,15 @@ const startGeneration = async () => {
 }
 
 .stat-box.kept {
-  border-color: #a7f3d0;
-  background-color: #ecfdf5;
+  border-color: var(--color-success-border);
+  background-color: var(--color-success-light);
+  color: var(--color-success-text);
 }
 
 .stat-box.rejected {
-  border-color: #fecaca;
-  background-color: #fef2f2;
+  border-color: var(--color-danger-border);
+  background-color: var(--color-danger-light);
+  color: var(--color-danger-text);
 }
 
 .stat-number {
