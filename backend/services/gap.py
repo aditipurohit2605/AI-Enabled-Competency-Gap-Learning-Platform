@@ -38,15 +38,19 @@ def get_user_combined_skills(user_id: int) -> dict[int, dict]:
             except (json.JSONDecodeError, TypeError):
                 skills_by_comp[comp_id]["evidence_list"].append(us.evidence)
 
-    # Compute combined average levels
+    # Compute combined levels: quiz takes priority over profile and self assessments
     result = {}
     for comp_id, data in skills_by_comp.items():
-        levels = list(data["source_levels"].values())
-        avg_level = sum(levels) / len(levels) if levels else 0.0
+        if "quiz" in data["source_levels"]:
+            final_level = float(data["source_levels"]["quiz"])
+        else:
+            levels = list(data["source_levels"].values())
+            final_level = sum(levels) / len(levels) if levels else 0.0
+
         result[comp_id] = {
             "competency_id": comp_id,
             "competency_name": data["competency_name"],
-            "level": round(avg_level, 2),
+            "level": round(final_level, 2),
             "sources": sorted(list(set(data["sources"]))),
             "source_breakdown": data["source_levels"],
             "evidence": data["evidence_list"]

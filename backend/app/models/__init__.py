@@ -10,7 +10,7 @@ from backend.app.models.competency import (
     SelfReferenceError
 )
 from backend.app.models.learning import Course, UserCourseProgress
-from backend.app.models.assessment import Document, Question, QuizAttempt
+from backend.app.models.assessment import Document, Question, QuizAttempt, QuizSession, GapSnapshot
 
 __all__ = [
     "User",
@@ -26,5 +26,7 @@ __all__ = [
     "UserCourseProgress",
     "Document",
     "Question",
-    "QuizAttempt"
+    "QuizAttempt",
+    "QuizSession",
+    "GapSnapshot"
 ]
