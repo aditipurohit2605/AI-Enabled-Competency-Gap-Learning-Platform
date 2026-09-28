@@ -1,5 +1,14 @@
 from backend.app.models.user import User
-from backend.app.models.competency import Role, Competency, RoleCompetency, UserSkill
+from backend.app.models.competency import (
+    Role,
+    Competency,
+    RoleCompetency,
+    UserSkill,
+    Prerequisite,
+    check_for_prerequisite_cycle,
+    CycleDetectedError,
+    SelfReferenceError
+)
 from backend.app.models.learning import Course
 from backend.app.models.assessment import Document, Question, QuizAttempt
 
@@ -9,6 +18,10 @@ __all__ = [
     "Competency",
     "RoleCompetency",
     "UserSkill",
+    "Prerequisite",
+    "check_for_prerequisite_cycle",
+    "CycleDetectedError",
+    "SelfReferenceError",
     "Course",
     "Document",
     "Question",

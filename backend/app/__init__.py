@@ -4,6 +4,7 @@ from backend.app.config import config_by_name, Config
 from backend.app.extensions import db
 from backend.app.blueprints.health import health_bp
 from backend.app.blueprints.auth import auth_bp
+from backend.app.blueprints.framework import framework_bp
 # Import models to ensure they are registered with SQLAlchemy metadata
 import backend.app.models  # noqa: F401
 
@@ -29,6 +30,7 @@ def create_app(config_object=None, config_name=None):
     # Register blueprints
     app.register_blueprint(health_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(framework_bp)
 
     # Ensure tables are created if running standalone
     with app.app_context():
