@@ -1,6 +1,6 @@
 import re
 from flask import Blueprint, request, jsonify, g
-from backend.app.extensions import db
+from backend.app.extensions import db, limiter
 from backend.app.models.user import User
 from backend.app.utils.auth import generate_token, role_required
 
@@ -61,6 +61,7 @@ def register():
 
 
 @auth_bp.route("/login", methods=["POST"])
+@limiter.limit("20 per minute")
 def login():
     """Authenticate a user and return a JWT access token."""
     data = request.get_json(silent=True) or {}

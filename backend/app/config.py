@@ -29,8 +29,9 @@ class Config:
     SQLALCHEMY_DATABASE_URI = database_url
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    # CORS
-    CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173,http://localhost:3000")
+    # Rate Limiting
+    RATELIMIT_DEFAULT = os.getenv("RATELIMIT_DEFAULT", "200 per day;50 per hour")
+    RATELIMIT_STORAGE_URI = os.getenv("RATELIMIT_STORAGE_URI", "memory://")
 
 
 class DevelopmentConfig(Config):
@@ -40,6 +41,7 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     DEBUG = True
+    RATELIMIT_ENABLED = False
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
     JWT_SECRET_KEY = "test-jwt-secret-key-at-least-32-bytes-long!"
     SECRET_KEY = "test-secret-key-at-least-32-bytes-long!"

@@ -5,7 +5,7 @@ from pathlib import Path
 from flask import Blueprint, request, jsonify, g
 from werkzeug.utils import secure_filename
 
-from backend.app.extensions import db
+from backend.app.extensions import db, limiter
 from backend.app.models.assessment import Document, Question, QuizAttempt, QuizSession, GapSnapshot
 from backend.app.models.competency import Competency, Role, RoleCompetency
 from backend.app.utils.auth import role_required
@@ -199,6 +199,7 @@ def list_questions():
 
 @assessment_bp.route("/documents/<int:document_id>/generate", methods=["POST"])
 @role_required("trainer", "admin")
+@limiter.limit("10 per minute")
 def generate_questions_for_document(document_id):
     """
     Generate multiple-choice questions from an uploaded document using LLM.
@@ -359,7 +360,8 @@ def approve_all_questions_for_document(document_id):
     db.session.commit()
     return jsonify({
         "message": f"Approved {len(draft_questions)} questions",
-        "count": len(draft_questions)
+        "count": len(draft_questions),
+        "approved_count": len(draft_questions)
     }), 200
 
 
