@@ -18,6 +18,12 @@ env/
 *.db
 *.sqlite3
 
+# Uploads and indexes
+backend/data/uploads/*
+!backend/data/uploads/.gitkeep
+backend/data/indexes/*
+!backend/data/indexes/.gitkeep
+
 # IDE / Editor artifacts
 .vscode/
 .idea/

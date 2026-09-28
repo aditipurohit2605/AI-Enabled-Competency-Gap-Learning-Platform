@@ -10,10 +10,12 @@ class Document(db.Model):
     title = db.Column(db.String(255), nullable=False)
     filename = db.Column(db.String(255), nullable=False)
     uploaded_by = db.Column(db.Integer, db.ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    competency_id = db.Column(db.Integer, db.ForeignKey("competencies.id", ondelete="SET NULL"), nullable=True)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
 
     # Relationships
     uploader = db.relationship("User", back_populates="documents")
+    competency = db.relationship("Competency", backref="documents")
     questions = db.relationship("Question", back_populates="document", cascade="all, delete-orphan")
 
     def to_dict(self):
@@ -22,6 +24,8 @@ class Document(db.Model):
             "title": self.title,
             "filename": self.filename,
             "uploaded_by": self.uploaded_by,
+            "competency_id": self.competency_id,
+            "competency_name": self.competency.name if self.competency else None,
             "created_at": self.created_at.isoformat() if self.created_at else None
         }
 
@@ -33,7 +37,7 @@ class Question(db.Model):
     """Assessment question generated from documents or created by trainers."""
     __tablename__ = "questions"
 
-    VALID_STATUSES = {"draft", "approved"}
+    VALID_STATUSES = {"draft", "approved", "rejected"}
 
     id = db.Column(db.Integer, primary_key=True)
     document_id = db.Column(db.Integer, db.ForeignKey("documents.id", ondelete="SET NULL"), nullable=True)
@@ -43,7 +47,7 @@ class Question(db.Model):
     explanation = db.Column(db.Text, nullable=True)
     source_passage = db.Column(db.Text, nullable=True)
     difficulty = db.Column(db.String(50), nullable=True, default="medium")
-    status = db.Column(db.String(20), nullable=False, default="draft")  # draft | approved
+    status = db.Column(db.String(20), nullable=False, default="draft")  # draft | approved | rejected
 
     # Relationships
     document = db.relationship("Document", back_populates="questions")
