@@ -1,0 +1,22 @@
+Statistical Officer Profile - Rajesh Kumar
+Current Designation: Junior Statistical Investigator, MoSPI / NSSO
+
+Professional Summary:
+I have 4 years of experience working in the Indian Official Statistical System, specializing in large-scale socio-economic survey execution and statistical analysis. 
+
+Key Responsibilities & Projects:
+1. Survey Design & Field Execution:
+   - Designed questionnaire modules and enumerator instructions for the Annual Survey of Unincorporated Sector Enterprises (ASUSE).
+   - Conducted field pilot testing and response validation using multi-stage stratified sampling methods across rural and urban sampling frames.
+
+2. Data Cleaning & Database Management:
+   - Built automated data cleaning pipelines using SQL and Python for Data Analysis to detect invalid records, impute missing values, and standardize survey response codes.
+   - Managed relational survey databases using PostgreSQL and SQL, executing complex aggregations and cross-tabulations for quarterly reporting.
+
+3. Reporting & Visualization:
+   - Developed executive dashboards using Power BI and Matplotlib for Data Visualization to present demographic metrics to senior ministry officials.
+   - Authored monthly statistical bulletins and summary reports adhering to national dissemination standards.
+
+Certifications and Training:
+- Completed the "Official Statistics Fundamentals & Sampling Techniques" certification on the iGOT Karmayogi digital platform (Government of India).
+- Attended the National Statistical Systems Workshop on National Accounts Basics and GDP estimation methodologies.

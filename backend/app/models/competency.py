@@ -149,15 +149,16 @@ class UserSkill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     competency_id = db.Column(db.Integer, db.ForeignKey("competencies.id", ondelete="CASCADE"), nullable=False)
-    level = db.Column(db.Integer, nullable=False)  # Current level (1-5)
-    evidence = db.Column(db.Text, nullable=True)  # Quiz score, certificate, trainer evaluation
+    level = db.Column(db.Float, nullable=False)  # Current level (1.0 to 5.0)
+    evidence = db.Column(db.Text, nullable=True)  # Matched sentences, reasons, or test notes
+    source = db.Column(db.String(50), nullable=False, default="profile")  # 'profile' | 'self' | 'quiz'
 
     # Relationships
     user = db.relationship("User", back_populates="skills")
     competency = db.relationship("Competency", back_populates="user_skills")
 
     __table_args__ = (
-        db.UniqueConstraint("user_id", "competency_id", name="uq_user_competency"),
+        db.UniqueConstraint("user_id", "competency_id", "source", name="uq_user_competency_source"),
     )
 
     def to_dict(self):
@@ -167,11 +168,12 @@ class UserSkill(db.Model):
             "competency_id": self.competency_id,
             "level": self.level,
             "evidence": self.evidence,
+            "source": self.source,
             "competency_name": self.competency.name if self.competency else None
         }
 
     def __repr__(self):
-        return f"<UserSkill user_id={self.user_id} competency_id={self.competency_id} level={self.level}>"
+        return f"<UserSkill user_id={self.user_id} competency_id={self.competency_id} level={self.level} source={self.source}>"
 
 
 class Prerequisite(db.Model):
