@@ -1,0 +1,43 @@
+services:
+  # Backend: Python Flask REST API Service
+  - type: web
+    name: karmayogi-competency-api
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: "pip install -r backend/requirements.txt && python backend/seed_demo.py"
+    startCommand: "gunicorn -w 2 -b 0.0.0.0:$PORT backend.wsgi:app"
+    autoDeploy: true
+    envVars:
+      - key: FLASK_APP
+        value: backend.wsgi:app
+      - key: FLASK_ENV
+        value: production
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: JWT_EXPIRATION_SECONDS
+        value: "86400"
+      - key: DATABASE_URL
+        value: "sqlite:///instance/competency_platform.db"
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: RATELIMIT_DEFAULT
+        value: "200 per day;50 per hour"
+
+  # Frontend: Vue 3 + Vite Static Site (Render Deployment)
+  - type: web
+    name: karmayogi-competency-web
+    runtime: static
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

@@ -200,6 +200,7 @@ npm run build
 - **[docs/PRD.md](docs/PRD.md)**: Product Requirements Document outlining system functional goals, competency models, and technical specifications.
 - **[docs/API.md](docs/API.md)**: Full REST API specification with endpoint routes, HTTP verbs, payload parameters, and response schemas.
 - **[docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md)**: Structured 5-minute walkthrough script with screen-by-screen actions and talking points.
+- **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**: Cloud hosting guide for Render and Vercel with blueprint setup and PostgreSQL migration.
 
 ---
 
