@@ -9,6 +9,13 @@ import LearningPath from '@/views/LearningPath.vue'
 import QuizView from '@/views/QuizView.vue'
 import HistoryView from '@/views/HistoryView.vue'
 
+// Step 7B Trainer & Admin Views
+import TrainerDocuments from '@/views/trainer/TrainerDocuments.vue'
+import TrainerReview from '@/views/trainer/TrainerReview.vue'
+import AdminAnalytics from '@/views/admin/AdminAnalytics.vue'
+import FrameworkManager from '@/views/admin/FrameworkManager.vue'
+import AdminUsers from '@/views/admin/AdminUsers.vue'
+
 const routes = [
   {
     path: '/login',
@@ -31,6 +38,7 @@ const routes = [
         path: '',
         redirect: '/dashboard'
       },
+      // Learner Portal Routes
       {
         path: 'dashboard',
         name: 'dashboard',
@@ -66,6 +74,40 @@ const routes = [
         name: 'history',
         component: HistoryView,
         meta: { requiresAuth: true }
+      },
+
+      // Trainer Portal Routes (trainer and admin roles)
+      {
+        path: 'trainer/documents',
+        name: 'trainer-documents',
+        component: TrainerDocuments,
+        meta: { requiresAuth: true, roles: ['trainer', 'admin'] }
+      },
+      {
+        path: 'trainer/review',
+        name: 'trainer-review',
+        component: TrainerReview,
+        meta: { requiresAuth: true, roles: ['trainer', 'admin'] }
+      },
+
+      // Admin Portal Routes (admin role only)
+      {
+        path: 'admin/analytics',
+        name: 'admin-analytics',
+        component: AdminAnalytics,
+        meta: { requiresAuth: true, roles: ['admin'] }
+      },
+      {
+        path: 'admin/framework',
+        name: 'admin-framework',
+        component: FrameworkManager,
+        meta: { requiresAuth: true, roles: ['admin'] }
+      },
+      {
+        path: 'admin/users',
+        name: 'admin-users',
+        component: AdminUsers,
+        meta: { requiresAuth: true, roles: ['admin'] }
       }
     ]
   },

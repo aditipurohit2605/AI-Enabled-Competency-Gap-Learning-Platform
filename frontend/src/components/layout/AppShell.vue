@@ -55,17 +55,34 @@
             <span>History & Trend</span>
           </router-link>
 
-          <!-- Future/Role-Restricted sections (visible to trainer/admin when implemented) -->
+          <!-- Trainer Portal (Trainer & Admin) -->
           <template v-if="auth.isTrainer || auth.isAdmin">
-            <div class="nav-section-title" style="margin-top: 1.5rem;">Administration</div>
-            <div class="nav-item disabled" title="Available in Trainer Portal (Step 7B)">
+            <div class="nav-section-title" style="margin-top: 1.5rem;">Trainer Portal</div>
+            <router-link to="/trainer/documents" class="nav-item" active-class="active">
               <span class="nav-icon">📚</span>
-              <span>Manage Documents</span>
-            </div>
-            <div class="nav-item disabled" title="Available in Trainer Portal (Step 7B)">
+              <span>Documents & MCQs</span>
+            </router-link>
+            <router-link to="/trainer/review" class="nav-item" active-class="active">
               <span class="nav-icon">📝</span>
-              <span>Review MCQs</span>
-            </div>
+              <span>Review Questions</span>
+            </router-link>
+          </template>
+
+          <!-- Admin Portal (Admin Only) -->
+          <template v-if="auth.isAdmin">
+            <div class="nav-section-title" style="margin-top: 1.5rem;">Admin Portal</div>
+            <router-link to="/admin/analytics" class="nav-item" active-class="active">
+              <span class="nav-icon">📊</span>
+              <span>Analytics & Heatmap</span>
+            </router-link>
+            <router-link to="/admin/framework" class="nav-item" active-class="active">
+              <span class="nav-icon">🏛️</span>
+              <span>Framework Manager</span>
+            </router-link>
+            <router-link to="/admin/users" class="nav-item" active-class="active">
+              <span class="nav-icon">👥</span>
+              <span>User Directory</span>
+            </router-link>
           </template>
         </nav>
       </aside>

@@ -131,12 +131,18 @@ def upload_document():
 @assessment_bp.route("/documents", methods=["GET"])
 @role_required("trainer", "admin")
 def list_documents():
-    """List all uploaded documents."""
+    """List all uploaded documents with question counts by status."""
     docs = Document.query.order_by(Document.created_at.desc()).all()
     res = []
     for d in docs:
         d_dict = d.to_dict()
-        d_dict["questions_count"] = Question.query.filter_by(document_id=d.id).count()
+        draft_c = Question.query.filter_by(document_id=d.id, status="draft").count()
+        approved_c = Question.query.filter_by(document_id=d.id, status="approved").count()
+        rejected_c = Question.query.filter_by(document_id=d.id, status="rejected").count()
+        d_dict["draft_count"] = draft_c
+        d_dict["approved_count"] = approved_c
+        d_dict["rejected_count"] = rejected_c
+        d_dict["questions_count"] = draft_c + approved_c + rejected_c
         res.append(d_dict)
     return jsonify({"documents": res}), 200
 
@@ -152,8 +158,39 @@ def get_document(document_id):
     _, chunks = load_document_index(document_id)
     doc_dict = doc.to_dict()
     doc_dict["chunks_count"] = len(chunks)
-    doc_dict["questions_count"] = Question.query.filter_by(document_id=doc.id).count()
+    draft_c = Question.query.filter_by(document_id=doc.id, status="draft").count()
+    approved_c = Question.query.filter_by(document_id=doc.id, status="approved").count()
+    rejected_c = Question.query.filter_by(document_id=doc.id, status="rejected").count()
+    doc_dict["draft_count"] = draft_c
+    doc_dict["approved_count"] = approved_c
+    doc_dict["rejected_count"] = rejected_c
+    doc_dict["questions_count"] = draft_c + approved_c + rejected_c
     return jsonify({"document": doc_dict}), 200
+
+
+@assessment_bp.route("/questions", methods=["GET"])
+@role_required("trainer", "admin")
+def list_questions():
+    """
+    List questions across all documents or filtered by document_id and/or status.
+    Available to trainers and admins only.
+    """
+    query = Question.query
+    doc_id = request.args.get("document_id")
+    if doc_id:
+        try:
+            query = query.filter_by(document_id=int(doc_id))
+        except (ValueError, TypeError):
+            pass
+    status_filter = request.args.get("status")
+    if status_filter and status_filter.lower() != "all":
+        query = query.filter_by(status=status_filter.lower())
+
+    questions = query.order_by(Question.id.desc()).all()
+    return jsonify({
+        "count": len(questions),
+        "questions": [q.to_dict(include_correct=True) for q in questions]
+    }), 200
 
 
 # ---------------------------------------------------------
