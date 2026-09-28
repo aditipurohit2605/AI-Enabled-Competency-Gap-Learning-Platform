@@ -37,7 +37,7 @@ flowchart TB
     end
 
     subgraph Data_Storage["Persistent Storage"]
-        DB[(SQLite / PostgreSQL DB)]
+        DB[(SQLite DB (PostgreSQL planned))]
         FAISS_Store[(FAISS Vector Indexes)]
         Doc_Store[(Uploaded Documents)]
     end
@@ -102,8 +102,19 @@ The application reads configuration from `.env` in the root directory:
 | `GEMINI_MODEL` | `gemini-2.5-flash` | Gemini model name |
 | `RATELIMIT_DEFAULT` | `200 per day;50 per hour` | Base API rate limit |
 
+> [!IMPORTANT]
+> The default `SECRET_KEY` and `JWT_SECRET_KEY` values are for local demos only and must be changed for any other use.
+
 > [!NOTE]
 > The platform is equipped with offline fallbacks and 36 pre-seeded verified questions across three core statistical documents. A Gemini API key is **not required** to demo the platform offline!
+
+---
+
+## 📸 Screenshots
+
+| Learner Dashboard | Competency Gap Report | Executive Heatmap |
+| :---: | :---: | :---: |
+| ![Dashboard](docs/screenshots/dashboard.png) | ![Gap Report](docs/screenshots/gap-report.png) | ![Heatmap](docs/screenshots/heatmap.png) |
 
 ---
 
@@ -118,7 +129,10 @@ The application reads configuration from `.env` in the root directory:
 ```bash
 # Clone the repository
 git clone https://github.com/aditipurohit2605/AI-Enabled-Competency-Gap-Learning-Platform.git
-cd "AI-Enabled Competency Gap & Learning Platform"
+cd AI-Enabled-Competency-Gap-Learning-Platform
+
+# Set up environment variables
+cp .env.example .env
 
 # Install backend dependencies
 pip install -r backend/requirements.txt
@@ -183,6 +197,7 @@ npm run build
 
 ## 📖 Documentation Index
 
+- **[docs/PRD.md](docs/PRD.md)**: Product Requirements Document outlining system functional goals, competency models, and technical specifications.
 - **[docs/API.md](docs/API.md)**: Full REST API specification with endpoint routes, HTTP verbs, payload parameters, and response schemas.
 - **[docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md)**: Structured 5-minute walkthrough script with screen-by-screen actions and talking points.
 
